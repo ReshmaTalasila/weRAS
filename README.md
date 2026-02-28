@@ -31,9 +31,9 @@ Teachers often spend hours designing lesson plans for each topic, which can redu
 
 ---
 ## team members:
-teamleader: 
-talasila sai resshma
-teammates: 
-kommu ahalya
-tungutoori sahasra deepthi
-kommu ahalya
+# teamleader: 
+# 1.talasila sai resshma
+# teammates: 
+# 2.kommu ahalya
+# 3.tungutoori sahasra deepthi
+# 4.kommu ahalya
