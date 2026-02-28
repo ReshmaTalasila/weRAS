@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lesson Plan Architect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    /* General Reset & Body */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+    }
+
+    /* Container */
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+
+    h1, h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    /* Landing Page Button */
+    .btn-primary {
+      display: inline-block;
+      padding: 12px 25px;
+      background-color: #4f46e5;
+      color: #fff;
+      font-weight: 500;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+
+    .btn-primary:hover {
+      background-color: #4338ca;
+    }
+
+    /* Form */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    select, input[type="text"], input[type="number"] {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    label {
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+
+    /* Loader */
+    .loader {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #4f46e5;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+      margin: 50px auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Output */
+    .lesson-plan {
+      background-color: #eef2ff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .lesson-plan h3 {
+      margin-bottom: 10px;
+      color: #4f46e5;
+    }
+
+    .lesson-plan p {
+      margin-bottom: 10px;
+    }
+
+    .lesson-section {
+      margin-bottom: 15px;
+      padding: 10px;
+      border-left: 4px solid #4f46e5;
+      background-color: #fff;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Landing Page -->
+  <div class="container" id="landing-page">
+    <h1>Eduzy</h1>
+    <h2>Teacher's Lesson Plan Architect</h2>
+    <p>Enter topic → Get structured 40-min lesson plan instantly</p>
+    <div style="text-align:center;">
+      <button class="btn-primary" onclick="showInputPage()">Generate Lesson Plan</button>
+    </div>
+  </div>
+
+  <!-- Input Page -->
+  <div class="container" id="input-page" style="display:none;">
+    <h2>Enter Lesson Details</h2>
+    <form id="lesson-form">
+      <div>
+        <label for="subject">Subject</label>
+        <select id="subject" required>
+          <option value="">Select Subject</option>
+          <option>Math</option>
+          <option>Science</option>
+          <option>English</option>
+          <option>History</option>
+        </select>
+      </div>
+      <div>
+        <label for="grade">Grade/Class</label>
+        <select id="grade" required>
+          <option value="">Select Grade</option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+           <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+           <option>9</option>
+          <option>10</option>
+          <option>11</option>
+          <option>12</option>
+        </select>
+      </div>
+      <div>
+        <label for="topic">Topic</label>
+        <input type="text" id="topic" placeholder="Enter topic" required>
+      </div>
+      <div>
+        <label for="duration">Duration (minutes)</label>
+        <input type="number" id="duration" value="40" min="10" max="180">
+      </div>
+      <div>
+        <label for="style">Teaching Style (Optional)</label>
+        <select id="style">
+          <option value="">Select Style</option>
+          <option>Interactive</option>
+          <option>Lecture</option>
+          <option>Activity-based</option>
+        </select>
+      </div>
+      <div style="text-align:center;">
+        <button type="button" class="btn-primary" onclick="generatePlan()">Generate Plan</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Processing Page -->
+  <div class="container" id="processing-page" style="display:none;">
+    <h2>Designing your lesson plan using AI…</h2>
+    <div class="loader"></div>
+  </div>
+
+  <!-- Output Page -->
+  <div class="container" id="output-page" style="display:none;">
+    <h2>Generated Lesson Plan</h2>
+    <div class="lesson-plan" id="lesson-output">
+      <!-- AI generated plan will appear here -->
+      <div class="lesson-section">
+        <h3>Introduction (5 mins)</h3>
+        <p>Introduce the topic engagingly and set learning objectives.</p>
+      </div>
+      <div class="lesson-section">
+        <h3>Main Activity (25 mins)</h3>
+        <p>Explain key concepts, include interactive questions, and activities.</p>
+      </div>
+      <div class="lesson-section">
+        <h3>Quiz/Recap (10 mins)</h3>
+        <p>Short quiz or discussion to reinforce learning.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showInputPage() {
+      document.getElementById('landing-page').style.display = 'none';
+      document.getElementById('input-page').style.display = 'block';
+    }
+
+    function generatePlan() {
+      document.getElementById('input-page').style.display = 'none';
+      document.getElementById('processing-page').style.display = 'block';
+
+    
+    // Simulate AI processing delay
+  setTimeout(() => {
+    document.getElementById('processing-page').style.display = 'none';
+    document.getElementById('output-page').style.display = 'block';
+
+    // Calculate timing
+    const introTime = Math.floor(duration * 0.2); // 20% intro
+    const mainTime = Math.floor(duration * 0.6); // 60% main activity
+    const recapTime = duration - introTime - mainTime; // remaining for recap
+
+    // Generate lesson plan dynamically
+    const lessonOutput = document.getElementById('lesson-output');
+  }, 2000); // 1.5s delay to simulate AI processing
+}
+  </script>
+
+</body>
+</html>
